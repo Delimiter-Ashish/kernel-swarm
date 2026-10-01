@@ -1,0 +1,16 @@
+#!/bin/bash -l
+# Batch version of the benchmark, for later when the swarm submits many jobs.
+# Submit from the repo root:  qsub jobs/bench.qsub
+#$ -P medaihack
+#$ -N kswarm_bench
+#$ -l h_rt=00:30:00
+#$ -l gpus=1
+#$ -l gpu_c=8.0
+#$ -cwd
+#$ -j y
+#$ -o logs/
+
+module load python3/3.10.12
+source kernel-swarm-venv/bin/activate
+nvidia-smi --query-gpu=name --format=csv,noheader
+python -m kernel_swarm.bench --all-baselines --compile

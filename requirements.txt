@@ -1,0 +1,3 @@
+# torch's Linux wheel bundles CUDA and a matching Triton - don't pin triton separately.
+torch>=2.4
+numpy

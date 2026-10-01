@@ -1,0 +1,6 @@
+kernel-swarm-venv/
+.cache/
+__pycache__/
+*.pyc
+logs/
+.env
