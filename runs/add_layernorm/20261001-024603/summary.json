@@ -1,0 +1,19 @@
+{
+  "task": "add_layernorm",
+  "llm": "LLM(gemini:gemini-flash-latest)",
+  "best_attempt": 6,
+  "final": {
+    "task": "add_layernorm",
+    "kernel": "/projectnb/medaihack/team4/kernel-swarm/kernels/best/add_layernorm.py",
+    "gpu": "NVIDIA A100-SXM4-80GB",
+    "torch": "2.14.1+cu130",
+    "timestamp": "2026-10-01T02:57:45",
+    "status": "ok",
+    "max_abs_err": 0.00390625,
+    "ms": 0.12489540398674238,
+    "eager_ms": 0.9315506083809811,
+    "speedup_vs_eager": 7.458646024155261,
+    "compile_ms": 0.12978210193182224,
+    "speedup_vs_compile": 1.0391263232200167
+  }
+}
