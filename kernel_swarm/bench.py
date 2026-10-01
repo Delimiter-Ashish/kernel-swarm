@@ -106,6 +106,12 @@ def evaluate_inprocess(task_name, kernel_path, with_compile=False):
     t_eager = do_bench(lambda: task.reference(*inputs), warmup=25, rep=100)
     result.update(status="ok", ms=t_kernel, eager_ms=t_eager, speedup_vs_eager=t_eager / t_kernel)
 
+    # Roofline: bytes the op must touch at minimum (all inputs read once + output written once).
+    from kernel_swarm.roofline import bandwidth_stats
+    nbytes = sum(t.numel() * t.element_size() for t in inputs if isinstance(t, torch.Tensor))
+    nbytes += out.numel() * out.element_size()
+    result.update(bandwidth_stats(nbytes, t_kernel, result["gpu"]))
+
     if with_compile:
         # torch.compile also fuses ops - this is the honest, harder baseline.
         try:
@@ -152,6 +158,8 @@ def pretty(r):
                 f"| {r['speedup_vs_eager']:.2f}x vs eager")
         if "speedup_vs_compile" in r:
             line += f" | {r['speedup_vs_compile']:.2f}x vs torch.compile"
+        if r.get("pct_peak_bw"):
+            line += f" | {r['pct_peak_bw']:.0f}% peak BW"
         return line + f" | max err {r['max_abs_err']:.2e} | {r.get('gpu')}"
     return head + ("\n" + r["error"] if r.get("error") else "")
 

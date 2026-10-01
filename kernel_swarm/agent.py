@@ -45,6 +45,7 @@ BANNED = [
     (r"torch\.(nn\.)?layer_norm|torch\.native_layer_norm", "calls torch layer_norm"),
     (r"torch\.compile", "uses torch.compile"),
     (r"torch\.ops\.", "calls torch.ops"),
+    (r"torch\.logsumexp|\.logsumexp\(|log_softmax\(", "calls torch logsumexp/log_softmax"),
 ]
 
 

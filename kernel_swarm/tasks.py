@@ -59,6 +59,17 @@ def _add_layernorm_ref(x, r, w, b):
     return F.layer_norm(h, (h.shape[-1],), w.float(), b.float(), eps=1e-5).to(x.dtype)
 
 
+# ---------- cross-entropy over a large vocabulary (the hard one) ----------
+def _cross_entropy_inputs(M=4096, V=50257, dtype=torch.float16, device="cuda"):
+    logits = torch.randn(M, V, device=device, dtype=dtype) * 2
+    target = torch.randint(0, V, (M,), device=device, dtype=torch.int64)
+    return (logits, target)
+
+
+def _cross_entropy_ref(logits, target):
+    return F.cross_entropy(logits.float(), target, reduction="none")
+
+
 TASKS = {
     "softmax": Task(
         name="softmax",
@@ -84,5 +95,17 @@ TASKS = {
         atol=2e-2,
         rtol=2e-2,
         shape_info={"x": "(8192, 4096)", "r": "(8192, 4096)", "w": "(4096,)", "b": "(4096,)"},
+    ),
+    "cross_entropy": Task(
+        name="cross_entropy",
+        description=("Per-row cross-entropy loss: loss[i] = logsumexp(logits[i]) - logits[i, target[i]]. "
+                     "logits (M, V) fp16 with a large, non-power-of-2 vocab V=50257 (GPT-2), target (M,) int64. "
+                     "Output is fp32 of shape (M,). A row does not fit in one block, so you need an "
+                     "online (streaming) softmax / logsumexp over chunks of the row."),
+        make_inputs=_cross_entropy_inputs,
+        reference=_cross_entropy_ref,
+        atol=1e-2,
+        rtol=1e-3,
+        shape_info={"logits": "(4096, 50257) fp16", "target": "(4096,) int64", "output": "(4096,) fp32"},
     ),
 }

@@ -1,0 +1,774 @@
+[
+ {
+  "id": 0,
+  "gen": 1,
+  "persona": "fresh",
+  "parents": [],
+  "idea": "We implement an online logsumexp algorithm across chunks of the vocabulary dimension for each row in a single fused kernel. Each block computes the streaming maximum and sum of exponentials in float32 for numerical stability, retrieves the ",
+  "origin": "llm",
+  "result": {
+   "task": "cross_entropy",
+   "kernel": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g01_000_fresh.py",
+   "gpu": "NVIDIA A100-SXM4-80GB",
+   "torch": "2.14.1+cu130",
+   "timestamp": "2026-10-01T03:08:25",
+   "status": "ok",
+   "max_abs_err": 1.9073486328125e-06,
+   "ms": 0.27935230027095903,
+   "eager_ms": 2.9838400557637215,
+   "speedup_vs_eager": 10.681279706197273,
+   "bytes_moved": 411754496,
+   "gbps": 1473.9613584732142,
+   "pct_peak_bw": 72.28844327970643
+  },
+  "path": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g01_000_fresh.py"
+ },
+ {
+  "id": 1,
+  "gen": 1,
+  "persona": "fresh",
+  "parents": [],
+  "idea": "We implement an online, streaming logsumexp Triton kernel that processes each row in chunks to avoid materializing large intermediate tensors. Each thread block handles one row, computing the running maximum and exponential sum in fp32 for ",
+  "origin": "llm",
+  "result": {
+   "task": "cross_entropy",
+   "kernel": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g01_001_fresh.py",
+   "gpu": "NVIDIA A100-SXM4-80GB",
+   "torch": "2.14.1+cu130",
+   "timestamp": "2026-10-01T03:08:30",
+   "status": "ok",
+   "max_abs_err": 1.9073486328125e-06,
+   "ms": 0.2828529977597265,
+   "eager_ms": 2.984365463256836,
+   "speedup_vs_eager": 10.55094160887044,
+   "bytes_moved": 411754496,
+   "gbps": 1455.7190457983786,
+   "pct_peak_bw": 71.39377370271598
+  },
+  "path": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g01_001_fresh.py"
+ },
+ {
+  "id": 2,
+  "gen": 1,
+  "persona": "fresh",
+  "parents": [],
+  "idea": "We implement an online logsumexp algorithm in a single-pass Triton kernel where each thread block processes one row of logits. We stream chunks of the vocabulary dimension in FP32, maintaining running max and sum-of-exps for numerical stabi",
+  "origin": "llm",
+  "result": {
+   "task": "cross_entropy",
+   "kernel": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g01_002_fresh.py",
+   "gpu": "NVIDIA A100-SXM4-80GB",
+   "torch": "2.14.1+cu130",
+   "timestamp": "2026-10-01T03:08:34",
+   "status": "ok",
+   "max_abs_err": 1.9073486328125e-06,
+   "ms": 0.27954346785942713,
+   "eager_ms": 2.98743744819395,
+   "speedup_vs_eager": 10.686844057097519,
+   "bytes_moved": 411754496,
+   "gbps": 1472.9533805707,
+   "pct_peak_bw": 72.2390083654095
+  },
+  "path": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g01_002_fresh.py"
+ },
+ {
+  "id": 3,
+  "gen": 1,
+  "persona": "fresh",
+  "parents": [],
+  "idea": "We implement a single-pass online log-sum-exp kernel where each Triton program processes one row of logits across chunked column blocks, maintaining numerical stability via running maximums. The target logit is loaded directly via point ind",
+  "origin": "llm",
+  "result": {
+   "task": "cross_entropy",
+   "kernel": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g01_003_fresh.py",
+   "gpu": "NVIDIA A100-SXM4-80GB",
+   "torch": "2.14.1+cu130",
+   "timestamp": "2026-10-01T03:08:38",
+   "status": "ok",
+   "max_abs_err": 1.9073486328125e-06,
+   "ms": 0.27915616884451955,
+   "eager_ms": 2.983680047094822,
+   "speedup_vs_eager": 10.688211044895912,
+   "bytes_moved": 411754496,
+   "gbps": 1474.9969441991204,
+   "pct_peak_bw": 72.33923218239923
+  },
+  "path": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g01_003_fresh.py"
+ },
+ {
+  "id": 4,
+  "gen": 1,
+  "persona": "fresh",
+  "parents": [],
+  "idea": "We implement an online logsumexp algorithm in a single Triton kernel pass per row, loading logits in chunks to compute numerically stable logsumexp in FP32 and subtracting the target logit. We autotune chunk size (`BLOCK_V`) and warp count ",
+  "origin": "llm",
+  "result": {
+   "task": "cross_entropy",
+   "kernel": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g01_004_fresh.py",
+   "gpu": "NVIDIA A100-SXM4-80GB",
+   "torch": "2.14.1+cu130",
+   "timestamp": "2026-10-01T03:08:42",
+   "status": "ok",
+   "max_abs_err": 1.9073486328125e-06,
+   "ms": 0.2824857400942452,
+   "eager_ms": 2.9851520359516144,
+   "speedup_vs_eager": 10.567443280342872,
+   "bytes_moved": 411754496,
+   "gbps": 1457.6116155903198,
+   "pct_peak_bw": 71.48659223101127
+  },
+  "path": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g01_004_fresh.py"
+ },
+ {
+  "id": 5,
+  "gen": 1,
+  "persona": "fresh",
+  "parents": [],
+  "idea": "We use an online log-sum-exp algorithm within each row, streaming across the large vocabulary dimension in blocks to keep registers under control while maintaining numerical stability. Each program processes one row independently, loading t",
+  "origin": "llm",
+  "result": {
+   "task": "cross_entropy",
+   "kernel": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g01_005_fresh.py",
+   "gpu": "NVIDIA A100-SXM4-80GB",
+   "torch": "2.14.1+cu130",
+   "timestamp": "2026-10-01T03:08:47",
+   "status": "ok",
+   "max_abs_err": 1.9073486328125e-06,
+   "ms": 0.2821973344932,
+   "eager_ms": 2.986976034939289,
+   "speedup_vs_eager": 10.584706763101142,
+   "bytes_moved": 411754496,
+   "gbps": 1459.1012942750597,
+   "pct_peak_bw": 71.55965150932123
+  },
+  "path": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g01_005_fresh.py"
+ },
+ {
+  "id": 6,
+  "gen": 2,
+  "persona": "memory",
+  "parents": [
+   3
+  ],
+  "idea": "We optimize memory throughput by separating the vocabulary loop into unmasked full-block loads and a single masked remainder, enabling unconditional 128-bit vectorized transfers. Setting the innermost stride as a compile-time constant allow",
+  "origin": "llm",
+  "result": {
+   "task": "cross_entropy",
+   "kernel": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g02_006_memory.py",
+   "gpu": "NVIDIA A100-SXM4-80GB",
+   "torch": "2.14.1+cu130",
+   "timestamp": "2026-10-01T03:12:48",
+   "status": "ok",
+   "max_abs_err": 1.9073486328125e-06,
+   "ms": 0.2765402353110434,
+   "eager_ms": 2.984800048172474,
+   "speedup_vs_eager": 10.793366270247326,
+   "bytes_moved": 411754496,
+   "gbps": 1488.9496840735385,
+   "pct_peak_bw": 73.02352545726035
+  },
+  "path": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g02_006_memory.py"
+ },
+ {
+  "id": 7,
+  "gen": 2,
+  "persona": "tuner",
+  "parents": [
+   3
+  ],
+  "idea": "We tune the streaming logsumexp kernel by adding compile-time unit-stride specialization for guaranteed 128-bit vectorized loads and exploring `num_stages` (pipelining `cp.async` transfers on Ampere) across 4K and 8K block configurations to",
+  "origin": "llm",
+  "result": {
+   "task": "cross_entropy",
+   "kernel": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g02_007_tuner.py",
+   "gpu": "NVIDIA A100-SXM4-80GB",
+   "torch": "2.14.1+cu130",
+   "timestamp": "2026-10-01T03:12:54",
+   "status": "ok",
+   "max_abs_err": 1.9073486328125e-06,
+   "ms": 0.27959893432756266,
+   "eager_ms": 2.982112020254135,
+   "speedup_vs_eager": 10.665677347541166,
+   "bytes_moved": 411754496,
+   "gbps": 1472.661178020125,
+   "pct_peak_bw": 72.22467768612677
+  },
+  "path": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g02_007_tuner.py"
+ },
+ {
+  "id": 8,
+  "gen": 2,
+  "persona": "explorer",
+  "parents": [
+   0
+  ],
+  "idea": "Eliminate all cross-thread reductions and warp synchronizations from the inner streaming loop by maintaining thread-local online log-sum-exp accumulators in registers. Using the algebraic identity for $\\max(m, x)$, each chunk update require",
+  "origin": "llm",
+  "result": {
+   "task": "cross_entropy",
+   "kernel": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g02_008_explorer.py",
+   "gpu": "NVIDIA A100-SXM4-80GB",
+   "torch": "2.14.1+cu130",
+   "timestamp": "2026-10-01T03:12:59",
+   "status": "ok",
+   "max_abs_err": 1.9073486328125e-06,
+   "ms": 0.40944332144950907,
+   "eager_ms": 2.9852480590343475,
+   "speedup_vs_eager": 7.290992190240124,
+   "bytes_moved": 411754496,
+   "gbps": 1005.6446751709343,
+   "pct_peak_bw": 49.320484314415616
+  },
+  "path": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g02_008_explorer.py"
+ },
+ {
+  "id": 9,
+  "gen": 2,
+  "persona": "crossover",
+  "parents": [
+   0,
+   5
+  ],
+  "idea": "We combine the early target logit load from Parent 1 (which hides DRAM latency across the entire reduction loop) with refined autotuning exploring software pipelining stages (`num_stages`) and warp configurations to maximize memory throughp",
+  "origin": "llm",
+  "result": {
+   "task": "cross_entropy",
+   "kernel": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g02_009_crossover.py",
+   "gpu": "NVIDIA A100-SXM4-80GB",
+   "torch": "2.14.1+cu130",
+   "timestamp": "2026-10-01T03:13:05",
+   "status": "ok",
+   "max_abs_err": 1.9073486328125e-06,
+   "ms": 0.29918686622615465,
+   "eager_ms": 2.9838400408625603,
+   "speedup_vs_eager": 9.973165194380835,
+   "bytes_moved": 411754496,
+   "gbps": 1376.2452249115631,
+   "pct_peak_bw": 67.49608753857592
+  },
+  "path": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g02_009_crossover.py"
+ },
+ {
+  "id": 10,
+  "gen": 2,
+  "persona": "memory",
+  "parents": [
+   2
+  ],
+  "idea": "We cut memory traffic and hide DRAM latency by streaming logits with `eviction_policy=\"evict_first\"` to avoid thrashing L2 cache. We expand the autotuner to explore larger block sizes (up to 8192) and deeper pipeline stages (3-4 stages with",
+  "origin": "llm",
+  "result": {
+   "task": "cross_entropy",
+   "kernel": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g02_010_memory.py",
+   "gpu": "NVIDIA A100-SXM4-80GB",
+   "torch": "2.14.1+cu130",
+   "timestamp": "2026-10-01T03:13:10",
+   "status": "ok",
+   "max_abs_err": 1.9073486328125e-06,
+   "ms": 0.32402488672071034,
+   "eager_ms": 2.9858560413122177,
+   "speedup_vs_eager": 9.214897261536096,
+   "bytes_moved": 411754496,
+   "gbps": 1270.7496024986106,
+   "pct_peak_bw": 62.32219727800935
+  },
+  "path": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g02_010_memory.py"
+ },
+ {
+  "id": 11,
+  "gen": 2,
+  "persona": "tuner",
+  "parents": [
+   3
+  ],
+  "idea": "We peel the first block to eliminate the conditional check in the online logsumexp loop, avoiding unnecessary branches and potential NaN propagation. We expand the autotune search space with larger tile sizes and explicit multi-stage softwa",
+  "origin": "llm",
+  "result": {
+   "task": "cross_entropy",
+   "kernel": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g02_011_tuner.py",
+   "gpu": "NVIDIA A100-SXM4-80GB",
+   "torch": "2.14.1+cu130",
+   "timestamp": "2026-10-01T03:13:16",
+   "status": "ok",
+   "max_abs_err": 1.9073486328125e-06,
+   "ms": 0.2795948461009867,
+   "eager_ms": 2.985024057328701,
+   "speedup_vs_eager": 10.676248503702896,
+   "bytes_moved": 411754496,
+   "gbps": 1472.6827112230767,
+   "pct_peak_bw": 72.2257337529709
+  },
+  "path": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g02_011_tuner.py"
+ },
+ {
+  "id": 12,
+  "gen": 3,
+  "persona": "memory",
+  "parents": [
+   6
+  ],
+  "idea": "We maintain the single-pass streaming online logsumexp design while optimizing inner-loop address arithmetic through constant pointer bumping (`col_ptrs += step`). This eliminates redundant coordinate vector materialization and register pre",
+  "origin": "llm",
+  "result": {
+   "task": "cross_entropy",
+   "kernel": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g03_012_memory.py",
+   "gpu": "NVIDIA A100-SXM4-80GB",
+   "torch": "2.14.1+cu130",
+   "timestamp": "2026-10-01T03:15:06",
+   "status": "ok",
+   "max_abs_err": 1.9073486328125e-06,
+   "ms": 0.2766881990729526,
+   "eager_ms": 2.983840048313141,
+   "speedup_vs_eager": 10.784124723463218,
+   "bytes_moved": 411754496,
+   "gbps": 1488.1534426823723,
+   "pct_peak_bw": 72.98447487407418
+  },
+  "path": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g03_012_memory.py"
+ },
+ {
+  "id": 13,
+  "gen": 3,
+  "persona": "tuner",
+  "parents": [
+   11
+  ],
+  "idea": "We optimize memory throughput by separating the vocabulary reduction into unmasked full-block loads with loop-invariant address offsets and a single masked tail block. We also load the target logit early to overlap DRAM read latency with th",
+  "origin": "llm",
+  "result": {
+   "task": "cross_entropy",
+   "kernel": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g03_013_tuner.py",
+   "gpu": "NVIDIA A100-SXM4-80GB",
+   "torch": "2.14.1+cu130",
+   "timestamp": "2026-10-01T03:15:13",
+   "status": "ok",
+   "max_abs_err": 1.9073486328125e-06,
+   "ms": 0.31080466214851415,
+   "eager_ms": 2.983968034386635,
+   "speedup_vs_eager": 9.600782735237036,
+   "bytes_moved": 411754496,
+   "gbps": 1324.8015430452206,
+   "pct_peak_bw": 64.97310166970185
+  },
+  "path": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g03_013_tuner.py"
+ },
+ {
+  "id": 14,
+  "gen": 3,
+  "persona": "explorer",
+  "parents": [
+   6
+  ],
+  "idea": "We structurally transform the row-streaming memory access pattern to achieve full 16-byte alignment across all rows regardless of non-power-of-2 vocab size $V=50257$. By prepending a small aligned offset (0 to 7 elements) per row and neutra",
+  "origin": "llm",
+  "result": {
+   "task": "cross_entropy",
+   "kernel": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g03_014_explorer.py",
+   "gpu": "NVIDIA A100-SXM4-80GB",
+   "torch": "2.14.1+cu130",
+   "timestamp": "2026-10-01T03:15:20",
+   "status": "ok",
+   "max_abs_err": 1.9073486328125e-06,
+   "ms": 0.2605916180610657,
+   "eager_ms": 2.98499309632086,
+   "speedup_vs_eager": 11.454678084163753,
+   "bytes_moved": 411754496,
+   "gbps": 1580.075748650947,
+   "pct_peak_bw": 77.49268016924704
+  },
+  "path": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g03_014_explorer.py"
+ },
+ {
+  "id": 15,
+  "gen": 3,
+  "persona": "crossover",
+  "parents": [
+   3,
+   0
+  ],
+  "idea": "We combine the early asynchronous target logit load from Parent 1 to overlap DRAM latency with the unmasked full-block streaming loop idea from the blackboard. This enables unconditional 128-bit vector loads across the bulk of the vocabular",
+  "origin": "llm",
+  "result": {
+   "task": "cross_entropy",
+   "kernel": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g03_015_crossover.py",
+   "gpu": "NVIDIA A100-SXM4-80GB",
+   "torch": "2.14.1+cu130",
+   "timestamp": "2026-10-01T03:15:26",
+   "status": "ok",
+   "max_abs_err": 1.9073486328125e-06,
+   "ms": 0.2824260869196483,
+   "eager_ms": 2.98563202470541,
+   "speedup_vs_eager": 10.571374823299655,
+   "bytes_moved": 411754496,
+   "gbps": 1457.9194878593005,
+   "pct_peak_bw": 71.50169141046104
+  },
+  "path": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g03_015_crossover.py"
+ },
+ {
+  "id": 16,
+  "gen": 3,
+  "persona": "memory",
+  "parents": [
+   6
+  ],
+  "idea": "We reduce register pressure by deferring the fp32 cast until the exponential step, allowing the chunk maximum reduction to operate directly on fp16 values with half the register footprint. We keep the target logit read at the end so it hits",
+  "origin": "llm",
+  "result": {
+   "task": "cross_entropy",
+   "kernel": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g03_016_memory.py",
+   "gpu": "NVIDIA A100-SXM4-80GB",
+   "torch": "2.14.1+cu130",
+   "timestamp": "2026-10-01T03:15:32",
+   "status": "ok",
+   "max_abs_err": 1.9073486328125e-06,
+   "ms": 0.28184850383004384,
+   "eager_ms": 2.98630403727293,
+   "speedup_vs_eager": 10.595422706496564,
+   "bytes_moved": 411754496,
+   "gbps": 1460.9071554564298,
+   "pct_peak_bw": 71.64821753096761
+  },
+  "path": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g03_016_memory.py"
+ },
+ {
+  "id": 17,
+  "gen": 3,
+  "persona": "tuner",
+  "parents": [
+   2
+  ],
+  "idea": "We eliminate masking overhead across the vocabulary dimension by separating the loop into unmasked full-block loads and a single masked tail block. This allows the compiler to issue aligned 128-bit vector memory instructions throughout the ",
+  "origin": "llm",
+  "result": {
+   "task": "cross_entropy",
+   "kernel": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g03_017_tuner.py",
+   "gpu": "NVIDIA A100-SXM4-80GB",
+   "torch": "2.14.1+cu130",
+   "timestamp": "2026-10-01T03:15:38",
+   "status": "ok",
+   "max_abs_err": 1.9073486328125e-06,
+   "ms": 0.27706026782592136,
+   "eager_ms": 2.9834240525960922,
+   "speedup_vs_eager": 10.768141083551525,
+   "bytes_moved": 411754496,
+   "gbps": 1486.154977149982,
+   "pct_peak_bw": 72.88646283226984
+  },
+  "path": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g03_017_tuner.py"
+ },
+ {
+  "id": 18,
+  "gen": 4,
+  "persona": "memory",
+  "parents": [
+   14
+  ],
+  "idea": "We optimize the memory pipeline by issuing the asynchronous target index load at the kernel head to completely hide its memory latency behind the streaming logsumexp reduction loop. We preserve the 16-byte aligned unmasked chunk streaming a",
+  "origin": "llm",
+  "result": {
+   "task": "cross_entropy",
+   "kernel": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g04_018_memory.py",
+   "gpu": "NVIDIA A100-SXM4-80GB",
+   "torch": "2.14.1+cu130",
+   "timestamp": "2026-10-01T03:18:10",
+   "status": "ok",
+   "max_abs_err": 1.9073486328125e-06,
+   "ms": 0.25976554722899936,
+   "eager_ms": 2.9854080602526665,
+   "speedup_vs_eager": 11.492702138905454,
+   "bytes_moved": 411754496,
+   "gbps": 1585.1004892385247,
+   "pct_peak_bw": 77.73911178217385
+  },
+  "path": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g04_018_memory.py"
+ },
+ {
+  "id": 19,
+  "gen": 4,
+  "persona": "tuner",
+  "parents": [
+   17
+  ],
+  "idea": "We achieve full 16-byte memory transaction alignment for every row by shifting each row's start pointer to the nearest 16-byte boundary, peeling the unmasked first block with register-level masking for the initial shift, and streaming unmas",
+  "origin": "llm",
+  "result": {
+   "task": "cross_entropy",
+   "kernel": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g04_019_tuner.py",
+   "gpu": "NVIDIA A100-SXM4-80GB",
+   "torch": "2.14.1+cu130",
+   "timestamp": "2026-10-01T03:18:22",
+   "status": "ok",
+   "max_abs_err": 1.9073486328125e-06,
+   "ms": 0.2606957147558372,
+   "eager_ms": 2.9867200553417206,
+   "speedup_vs_eager": 11.456728616114875,
+   "bytes_moved": 411754496,
+   "gbps": 1579.4448189746486,
+   "pct_peak_bw": 77.46173707575521
+  },
+  "path": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g04_019_tuner.py"
+ },
+ {
+  "id": 20,
+  "gen": 4,
+  "persona": "explorer",
+  "parents": [
+   3
+  ],
+  "idea": "To achieve maximum memory throughput across arbitrary non-power-of-2 vocabulary sizes, we decompose each row's streaming reduction into a 128-byte cache-line aligned address space. This guarantees that all middle loop iterations perform unc",
+  "origin": "llm",
+  "result": {
+   "task": "cross_entropy",
+   "kernel": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g04_020_explorer.py",
+   "gpu": "NVIDIA A100-SXM4-80GB",
+   "torch": "2.14.1+cu130",
+   "timestamp": "2026-10-01T03:18:29",
+   "status": "ok",
+   "max_abs_err": 1.9073486328125e-06,
+   "ms": 0.27641173352797827,
+   "eager_ms": 2.985521585710587,
+   "speedup_vs_eager": 10.800994399206262,
+   "bytes_moved": 411754496,
+   "gbps": 1489.6418858366678,
+   "pct_peak_bw": 73.05747355746287
+  },
+  "path": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g04_020_explorer.py"
+ },
+ {
+  "id": 21,
+  "gen": 4,
+  "persona": "crossover",
+  "parents": [
+   14,
+   6
+  ],
+  "idea": "We combine the 16-byte row alignment technique from Parent 1 with early asynchronous target logit prefetching to completely hide target DRAM latency behind the streaming reduction. We also propagate alignment hints across all pointer offset",
+  "origin": "llm",
+  "result": {
+   "task": "cross_entropy",
+   "kernel": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g04_021_crossover.py",
+   "gpu": "NVIDIA A100-SXM4-80GB",
+   "torch": "2.14.1+cu130",
+   "timestamp": "2026-10-01T03:18:35",
+   "status": "ok",
+   "max_abs_err": 1.9073486328125e-06,
+   "ms": 0.26001440742576265,
+   "eager_ms": 2.9870740905884774,
+   "speedup_vs_eager": 11.48810990960693,
+   "bytes_moved": 411754496,
+   "gbps": 1583.5833870765834,
+   "pct_peak_bw": 77.66470755647785
+  },
+  "path": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g04_021_crossover.py"
+ },
+ {
+  "id": 22,
+  "gen": 4,
+  "persona": "memory",
+  "parents": [
+   6
+  ],
+  "idea": "We achieve full 16-byte load alignment across all rows for non-power-of-2 vocabularies by shifting the row pointer back to the nearest 16-byte boundary and masking only the initial peeled elements. Chunk 0 directly initializes the online lo",
+  "origin": "llm",
+  "result": {
+   "task": "cross_entropy",
+   "kernel": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g04_022_memory.py",
+   "gpu": "NVIDIA A100-SXM4-80GB",
+   "torch": "2.14.1+cu130",
+   "timestamp": "2026-10-01T03:18:42",
+   "status": "ok",
+   "max_abs_err": 1.9073486328125e-06,
+   "ms": 0.2626934613638777,
+   "eager_ms": 2.9833600372076035,
+   "speedup_vs_eager": 11.356811173442619,
+   "bytes_moved": 411754496,
+   "gbps": 1567.4333645847616,
+   "pct_peak_bw": 76.87265152451013
+  },
+  "path": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g04_022_memory.py"
+ },
+ {
+  "id": 23,
+  "gen": 4,
+  "persona": "tuner",
+  "parents": [
+   14
+  ],
+  "idea": "We optimize Parent 1 by issuing the target logit loads asynchronously at the kernel prologue to completely overlap DRAM latency with the logsumexp loop. We also clean up base pointer arithmetic with 16-byte alignment hints and expand the au",
+  "origin": "llm",
+  "result": {
+   "task": "cross_entropy",
+   "kernel": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g04_023_tuner.py",
+   "gpu": "NVIDIA A100-SXM4-80GB",
+   "torch": "2.14.1+cu130",
+   "timestamp": "2026-10-01T03:18:49",
+   "status": "ok",
+   "max_abs_err": 1.9073486328125e-06,
+   "ms": 0.25909248244762423,
+   "eager_ms": 2.985917975825648,
+   "speedup_vs_eager": 11.524525712278255,
+   "bytes_moved": 411754496,
+   "gbps": 1589.2182286038985,
+   "pct_peak_bw": 77.94106074565467
+  },
+  "path": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g04_023_tuner.py"
+ },
+ {
+  "id": 24,
+  "gen": 5,
+  "persona": "memory",
+  "parents": [
+   23
+  ],
+  "idea": "We maximize memory pipeline efficiency and GPU occupancy on A100 by expanding the autotuning search space to deeper `cp.async` pipeline stages (`num_stages=5, 6`) with 16-warp configurations for large blocks (`BLOCK_V=8192` and `4096`). We ",
+  "origin": "llm",
+  "result": {
+   "task": "cross_entropy",
+   "kernel": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g05_024_memory.py",
+   "gpu": "NVIDIA A100-SXM4-80GB",
+   "torch": "2.14.1+cu130",
+   "timestamp": "2026-10-01T03:21:16",
+   "status": "ok",
+   "max_abs_err": 1.9073486328125e-06,
+   "ms": 0.25919847172569943,
+   "eager_ms": 2.9841920360922813,
+   "speedup_vs_eager": 11.513154441938015,
+   "bytes_moved": 411754496,
+   "gbps": 1588.568378735447,
+   "pct_peak_bw": 77.90918973690275
+  },
+  "path": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g05_024_memory.py"
+ },
+ {
+  "id": 25,
+  "gen": 5,
+  "persona": "tuner",
+  "parents": [
+   18
+  ],
+  "idea": "We overlap the global memory latency of the target logit load by issuing both the target index load and the target logit load in the kernel prologue, interleaving index arithmetic to hide dependencies. We also expand the autotuning search s",
+  "origin": "llm",
+  "result": {
+   "task": "cross_entropy",
+   "kernel": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g05_025_tuner.py",
+   "gpu": "NVIDIA A100-SXM4-80GB",
+   "torch": "2.14.1+cu130",
+   "timestamp": "2026-10-01T03:21:28",
+   "status": "ok",
+   "max_abs_err": 1.9073486328125e-06,
+   "ms": 0.26053836941719055,
+   "eager_ms": 2.983712024986744,
+   "speedup_vs_eager": 11.452102166990365,
+   "bytes_moved": 411754496,
+   "gbps": 1580.3986833918984,
+   "pct_peak_bw": 77.5085180672829
+  },
+  "path": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g05_025_tuner.py"
+ },
+ {
+  "id": 26,
+  "gen": 5,
+  "persona": "explorer",
+  "parents": [
+   23
+  ],
+  "idea": "We optimize the kernel through three structural innovations: 1. **Full 128-byte DRAM cache-line alignment**: We align the streaming pointer of every row to a 64-element (128-byte) boundary so every warp load instruction achieves 100% cache ",
+  "origin": "llm",
+  "result": {
+   "task": "cross_entropy",
+   "kernel": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g05_026_explorer.py",
+   "gpu": "NVIDIA A100-SXM4-80GB",
+   "torch": "2.14.1+cu130",
+   "timestamp": "2026-10-01T03:21:39",
+   "status": "ok",
+   "max_abs_err": 1.9073486328125e-06,
+   "ms": 0.2584543504885265,
+   "eager_ms": 2.985554625911097,
+   "speedup_vs_eager": 11.551574273243407,
+   "bytes_moved": 411754496,
+   "gbps": 1593.1420586332088,
+   "pct_peak_bw": 78.13349968774932
+  },
+  "path": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g05_026_explorer.py"
+ },
+ {
+  "id": 27,
+  "gen": 5,
+  "persona": "crossover",
+  "parents": [
+   18,
+   21
+  ],
+  "idea": "We combine 16-byte memory alignment with latency-hiding target logit prefetching by issuing the target index load at the kernel head and the target logit load immediately after the first chunk load. This eliminates the DRAM latency stall at",
+  "origin": "llm",
+  "result": {
+   "task": "cross_entropy",
+   "kernel": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g05_027_crossover.py",
+   "gpu": "NVIDIA A100-SXM4-80GB",
+   "torch": "2.14.1+cu130",
+   "timestamp": "2026-10-01T03:21:47",
+   "status": "ok",
+   "max_abs_err": 1.9073486328125e-06,
+   "ms": 0.26014554981262455,
+   "eager_ms": 2.983744040131569,
+   "speedup_vs_eager": 11.469517899809068,
+   "bytes_moved": 411754496,
+   "gbps": 1582.7850843367303,
+   "pct_peak_bw": 77.62555587723052
+  },
+  "path": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g05_027_crossover.py"
+ },
+ {
+  "id": 28,
+  "gen": 5,
+  "persona": "memory",
+  "parents": [
+   21
+  ],
+  "idea": "We optimize the memory pipeline by overlapping DRAM requests at the kernel prologue: the target index load is issued first, followed immediately by the aligned Chunk 0 load, allowing the dependent target logit request to be dispatched witho",
+  "origin": "llm",
+  "result": {
+   "task": "cross_entropy",
+   "kernel": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g05_028_memory.py",
+   "gpu": "NVIDIA A100-SXM4-80GB",
+   "torch": "2.14.1+cu130",
+   "timestamp": "2026-10-01T03:21:57",
+   "status": "ok",
+   "max_abs_err": 1.9073486328125e-06,
+   "ms": 0.25835397756432155,
+   "eager_ms": 2.984480045735836,
+   "speedup_vs_eager": 11.551902834524,
+   "bytes_moved": 411754496,
+   "gbps": 1593.761009146789,
+   "pct_peak_bw": 78.16385527939133
+  },
+  "path": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g05_028_memory.py"
+ },
+ {
+  "id": 29,
+  "gen": 5,
+  "persona": "tuner",
+  "parents": [
+   23
+  ],
+  "idea": "We optimize the kernel by applying explicit alignment (`tl.multiple_of`) and contiguous vectorization (`tl.max_contiguous`) hints to unmasked chunk load pointers, guaranteeing maximal 128-bit memory instructions across the pipeline. We also",
+  "origin": "llm",
+  "result": {
+   "task": "cross_entropy",
+   "kernel": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g05_029_tuner.py",
+   "gpu": "NVIDIA A100-SXM4-80GB",
+   "torch": "2.14.1+cu130",
+   "timestamp": "2026-10-01T03:22:05",
+   "status": "ok",
+   "max_abs_err": 1.9073486328125e-06,
+   "ms": 0.2596186782971796,
+   "eager_ms": 2.9851520359516144,
+   "speedup_vs_eager": 11.498217522448746,
+   "bytes_moved": 411754496,
+   "gbps": 1585.9971967374163,
+   "pct_peak_bw": 77.78308958986838
+  },
+  "path": "/projectnb/medaihack/team4/kernel-swarm/runs/cross_entropy/swarm-20261001-030802/kernels/g05_029_tuner.py"
+ }
+]

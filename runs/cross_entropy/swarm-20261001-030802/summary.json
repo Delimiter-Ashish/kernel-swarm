@@ -1,0 +1,22 @@
+{
+  "task": "cross_entropy",
+  "llm": "LLM(gemini:gemini-flash-latest)",
+  "champion_id": 28,
+  "final": {
+    "task": "cross_entropy",
+    "kernel": "/projectnb/medaihack/team4/kernel-swarm/kernels/best/cross_entropy.py",
+    "gpu": "NVIDIA A100-SXM4-80GB",
+    "torch": "2.14.1+cu130",
+    "timestamp": "2026-10-01T03:22:18",
+    "status": "ok",
+    "max_abs_err": 1.9073486328125e-06,
+    "ms": 0.25858031840078416,
+    "eager_ms": 2.9880000352859497,
+    "speedup_vs_eager": 11.555403960229977,
+    "bytes_moved": 411754496,
+    "gbps": 1592.365956336263,
+    "pct_peak_bw": 78.0954367992282,
+    "compile_ms": 0.5444148935120682,
+    "speedup_vs_compile": 2.1053995790517104
+  }
+}
